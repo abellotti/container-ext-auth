@@ -1,6 +1,5 @@
 set -x
 HTTPD_POD=`httpdpod`
-oc cp ipa              $HTTPD_POD:/root/ipa
-oc cp saml             $HTTPD_POD:/root/saml
-oc cp active_directory $HTTPD_POD:/root/active_directory
-oc cp auth-api         $HTTPD_POD:/root/auth-api
+oc cp $REPO_DIR/scripts/ipa              $HTTPD_POD:/root/ipa
+oc cp $REPO_DIR/scripts/saml             $HTTPD_POD:/root/saml
+oc cp $REPO_DIR/scripts/active_directory $HTTPD_POD:/root/active_directory

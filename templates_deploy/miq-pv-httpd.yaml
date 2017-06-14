@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: miq-pv03
+  name: miq-pv04
 spec:
   capacity:
     storage: 5Gi
   accessModes:
     - ReadWriteOnce
-  hostPath: 
-    path: /var/lib/minishift/miq-server
-  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /var/lib/minishift/miq-apache
+  persistentVolumeReclaimPolicy: Recycle

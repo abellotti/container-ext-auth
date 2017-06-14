@@ -8,10 +8,10 @@ else
   oc delete persistentvolume/miq-pv02
   oc delete persistentvolume/miq-pv03
   oc delete persistentvolume/miq-pv04
-  oc create -f templates_deploy/miq-pv-db.yaml
-  oc create -f templates_deploy/miq-pv-region.yaml
-  oc create -f templates_deploy/miq-pv-server.yaml
-  oc create -f templates_deploy/miq-pv-httpd.yaml
+  oc create -f $REPO_DIR/templates_deploy/miq-pv-db.yaml
+  oc create -f $REPO_DIR/templates_deploy/miq-pv-region.yaml
+  oc create -f $REPO_DIR/templates_deploy/miq-pv-server.yaml
+  oc create -f $REPO_DIR/templates_deploy/miq-pv-httpd.yaml
   oc get pv
   oc login $(minishift ip):8443 -u developer -p developer
 fi

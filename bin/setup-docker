@@ -8,6 +8,10 @@ else
     export PATH=:$PATH:`pwd`
   fi
 
+  REPO_DIR=`pwd`
+  export REPO_DIR=`dirname $REPO_DIR`
+  echo "ManageIQ External Authentication Repo directory: $REPO_DIR"
+
   echo "oc Login as developer ..."
   oc login $(minishift ip):8443 -u developer -p developer
 
