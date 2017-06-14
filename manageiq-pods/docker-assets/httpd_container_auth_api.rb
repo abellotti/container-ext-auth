@@ -18,10 +18,9 @@ Rails.configuration.to_prepare do
       end
 
       begin
-        response = conn.run_request(:get, "/GetUserGroups", nil, nil) do |req|
+        response = conn.run_request(:get, "/api/dbus/groups:#{user}", nil, nil) do |req|
           req.headers[:content_type] = "application/json"
           req.headers[:accept]       = "application/json"
-          req.params.merge!("user" => user)
         end
       rescue => err
         raise("Failed to connect to the httpd container Authentication API service - #{err}")
@@ -63,17 +62,16 @@ Rails.configuration.to_prepare do
       # end
     end
 
-    def user_attrs_from_external_directory_via_auth_api(username)
+    def user_attrs_from_external_directory_via_auth_api(user)
       conn = Faraday.new(:url => "http://httpd:4100") do |faraday|
         faraday.request(:url_encoded)               # form-encode POST params
         faraday.adapter(Faraday.default_adapter)    # make requests with Net::HTTP
       end
 
       begin
-        response = conn.run_request(:get, "/GetUserAttr", nil, nil) do |req|
+        response = conn.run_request(:get, "/api/dbus/user_attrs:#{user}", nil, nil) do |req|
           req.headers[:content_type] = "application/json"
           req.headers[:accept]       = "application/json"
-          req.params.merge!("user" => username)
         end
       rescue => err
         raise("Failed to connect to the httpd container Authentication API service - #{err}")
