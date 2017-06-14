@@ -39,18 +39,6 @@ get "/api/dbus/user_attrs:user" do |env|
   end
 end
 
-get "/GetUserAttr" do |env|
-  env.response.content_type = "application/json"
-  user = env.params.query["user"]
-  if user.nil?
-    gen_error(env, 400, "Must specified a user parameter for GetUserAttr")
-  else
-    cmd = "/usr/bin/dbus-send --print-reply --system --dest=org.freedesktop.sssd.infopipe /org/freedesktop/sssd/infopipe org.freedesktop.sssd.infopipe.GetUserAttr string:#{user} array:string:mail,givenname,sn,displayname"
-    res = `#{cmd} 2>&1`
-    $?.exit_status != 0 ? gen_error(env, 400, res) : { "result" => parse_user_attrs(res) }.to_json
-  end
-end
-
 get "/api/dbus/groups:user" do |env|
   env.response.content_type = "application/json"
   user = env.params.url["user"]
@@ -60,18 +48,6 @@ get "/api/dbus/groups:user" do |env|
     cmd = "/usr/bin/dbus-send --print-reply --system --dest=org.freedesktop.sssd.infopipe /org/freedesktop/sssd/infopipe org.freedesktop.sssd.infopipe.GetUserGroups string:#{user}"
     res = `#{cmd} 2>&1`
     $?.exit_status != 0 ? gen_error(env, 400, res) : { "result" => parse_user_attrs(res) }.to_json
-  end
-end
-
-get "/GetUserGroups" do |env|
-  env.response.content_type = "application/json"
-  user = env.params.query["user"]
-  if user.nil?
-    gen_error(env, 400, "Must specified a user parameter for GetUserGroups")
-  else
-    cmd = "/usr/bin/dbus-send --print-reply --system --dest=org.freedesktop.sssd.infopipe /org/freedesktop/sssd/infopipe org.freedesktop.sssd.infopipe.GetUserGroups string:#{user}"
-    res = `#{cmd} 2>&1`
-    $?.exit_status != 0 ? gen_error(env, 400, res) : { "result" => parse_groups(res) }.to_json
   end
 end
 
