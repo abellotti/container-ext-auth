@@ -18,7 +18,7 @@ Rails.configuration.to_prepare do
       end
 
       begin
-        response = conn.run_request(:get, "/api/dbus/groups:#{user}", nil, nil) do |req|
+        response = conn.run_request(:get, "/api/dbus/groups/#{user}", nil, nil) do |req|
           req.headers[:content_type] = "application/json"
           req.headers[:accept]       = "application/json"
         end
@@ -69,7 +69,7 @@ Rails.configuration.to_prepare do
       end
 
       begin
-        response = conn.run_request(:get, "/api/dbus/user_attrs:#{user}", nil, nil) do |req|
+        response = conn.run_request(:get, "/api/dbus/user_attrs/#{user}", nil, nil) do |req|
           req.headers[:content_type] = "application/json"
           req.headers[:accept]       = "application/json"
         end

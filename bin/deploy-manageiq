@@ -4,6 +4,9 @@ then
 elif [ -n "$(oc get pods | grep manageiq)" ]
 then
   echo "ManageIQ Pods currently exist" 
+elif [ ! -h templates ]
+then
+  echo "Missing ManageIQ Pod templates symlink"
 else
   if [ "${1}" = "-f" ]
   then

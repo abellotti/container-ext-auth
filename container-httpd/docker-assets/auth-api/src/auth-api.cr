@@ -27,11 +27,11 @@ def parse_groups(dbus_send_output)
   end
 end
 
-get "/api/dbus/user_attrs:user" do |env|
+get "/api/dbus/user_attrs/:user" do |env|
   env.response.content_type = "application/json"
   user = env.params.url["user"]
   if user == ""
-    gen_error(env, 400, "Must specified a :user with /api/dbus/user_attrs:user")
+    gen_error(env, 400, "Must specified a :user with /api/dbus/user_attrs/:user")
   else
     cmd = "/usr/bin/dbus-send --print-reply --system --dest=org.freedesktop.sssd.infopipe /org/freedesktop/sssd/infopipe org.freedesktop.sssd.infopipe.GetUserAttr string:#{user} array:string:mail,givenname,sn,displayname"
     res = `#{cmd} 2>&1`
@@ -39,15 +39,15 @@ get "/api/dbus/user_attrs:user" do |env|
   end
 end
 
-get "/api/dbus/groups:user" do |env|
+get "/api/dbus/groups/:user" do |env|
   env.response.content_type = "application/json"
   user = env.params.url["user"]
   if user == ""
-    gen_error(env, 400, "Must specified a :user with /api/dbus/groups:user")
+    gen_error(env, 400, "Must specified a :user with /api/dbus/groups/:user")
   else
     cmd = "/usr/bin/dbus-send --print-reply --system --dest=org.freedesktop.sssd.infopipe /org/freedesktop/sssd/infopipe org.freedesktop.sssd.infopipe.GetUserGroups string:#{user}"
     res = `#{cmd} 2>&1`
-    $?.exit_status != 0 ? gen_error(env, 400, res) : { "result" => parse_user_attrs(res) }.to_json
+    $?.exit_status != 0 ? gen_error(env, 400, res) : { "result" => parse_groups(res) }.to_json
   end
 end
 
