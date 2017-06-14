@@ -1,0 +1,2 @@
+set -x
+oc rsh manageiq-0 bash -i

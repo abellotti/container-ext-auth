@@ -1,0 +1,13 @@
+echo "Killing Pod ..."
+./kill-pods
+echo "Waiting for Pod removal ..."
+while :
+do
+  if [ -z "$(oc get pods 2>/dev/null)" ]
+  then
+    break
+  fi
+  sleep 1
+done
+echo "Deploying ManageIQ ..."
+./deploy-manageiq -f

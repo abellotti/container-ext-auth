@@ -1,0 +1,20 @@
+# minishift config set memory 10240
+# minishift config unset memory
+# minishift config set vm-driver vmwarefusion
+# minishift config unset vm-driver
+echo "Minishift Configuration:"
+echo "  Memory:  `minishift config get memory`"
+echo "  Driver:  `minishift config get vm-driver`"
+if [ "$(minishift status)" != "Running" ]
+then
+  echo "Starting Minishift ..."
+  minishift start
+else
+  echo "Minishift Running ..."
+fi
+# minishift start --memory=10240 --vm-driver=vmwarefusion
+# docker-machine options:
+# --vmwarefusion-cpu-count=1
+# --vmwarefusion-disk-size-count=20000
+# --vmwarefusion-memory-size=1024
+# --vmwarefusion-no-share=false

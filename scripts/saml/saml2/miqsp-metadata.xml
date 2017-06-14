@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EntityDescriptor
+ entityID="https://ext-auth-rearch.aabtest.redhat.com"
+ xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+ <SPSSODescriptor
+   AuthnRequestsSigned="true"
+   WantAssertionsSigned="true"
+   protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+   <KeyDescriptor use="signing">
+     <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+       <ds:X509Data>
+         <ds:X509Certificate>MIIC1jCCAb4CCQCdtlj9uF3h9TANBgkqhkiG9w0BAQUFADAtMSswKQYDVQQDEyJl
+eHQtYXV0aC1yZWFyY2guYWFidGVzdC5yZWRoYXQuY29tMB4XDTE3MDUxOTIwNTg1
+MFoXDTI3MDUxOTIwNTg1MFowLTErMCkGA1UEAxMiZXh0LWF1dGgtcmVhcmNoLmFh
+YnRlc3QucmVkaGF0LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
+AKhDh/kPL3I6SQ+/85vRbhWM9OQekJ+yXmBeKAJQctZNO73Bj4wOkrIwymIUpW/D
+8ui2JYRZ+9dzhMNscz3zXUx66RBLW6hGUauYfkBUFrz0aeeTxRkvZfhadQ9T/CY+
+59OYcCBfCdNrxDFvW2KAdtjRpQzg+tfbINLxeddpJx/NWGU55c5b5/xl2qW84eUx
+rYFnHh+OKSGjFKmUU17yNCioG3bssmnl2v3M9s1N8qda5KO56sLvXBMgZJazS2OJ
+gopvcInY6XnVcgmycth8ULf8eMrjjqriEb5eTo3DR1FCb3YmOTaz0mQdrLac1idG
+OJxyXDWJeXkU4/0iR0s2gh0CAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAE5MyKrbL
+IrRPNqfYnJ1BrhPVjVOAF5oNlWUmm7zb/KRcLRJbSn7+OHVLTb98Ewj3D4ws9NPl
+G7pez915m8SMTqhtp40IDJTmRCSWiL7yZdWJChUOB7D1ei1GQ0ayz0xg27FTgWPW
+/Xk1jquFcFKnK6YYByRgL1xlbQXGI6vVK/CvRaMvOc+N9fY7WMBM28OsiHBFJXZ/
+qizQ9FDo1UmiqQCCkZWpfVv+767fvTLASttk68N3zlblbhVcIFCzmiVBlKSb9v/m
+R6NOUqILJdcV1JZWNjkIQ9dv/UIyaU44JCxX/qSXK4WazKmvV2m2SxAQvmXpdL8T
+DUHaL8LDXuFLVQ==</ds:X509Certificate>
+       </ds:X509Data>
+     </ds:KeyInfo>
+   </KeyDescriptor>
+   <KeyDescriptor use="encryption">
+     <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+       <ds:X509Data>
+         <ds:X509Certificate>MIIC1jCCAb4CCQCdtlj9uF3h9TANBgkqhkiG9w0BAQUFADAtMSswKQYDVQQDEyJl
+eHQtYXV0aC1yZWFyY2guYWFidGVzdC5yZWRoYXQuY29tMB4XDTE3MDUxOTIwNTg1
+MFoXDTI3MDUxOTIwNTg1MFowLTErMCkGA1UEAxMiZXh0LWF1dGgtcmVhcmNoLmFh
+YnRlc3QucmVkaGF0LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
+AKhDh/kPL3I6SQ+/85vRbhWM9OQekJ+yXmBeKAJQctZNO73Bj4wOkrIwymIUpW/D
+8ui2JYRZ+9dzhMNscz3zXUx66RBLW6hGUauYfkBUFrz0aeeTxRkvZfhadQ9T/CY+
+59OYcCBfCdNrxDFvW2KAdtjRpQzg+tfbINLxeddpJx/NWGU55c5b5/xl2qW84eUx
+rYFnHh+OKSGjFKmUU17yNCioG3bssmnl2v3M9s1N8qda5KO56sLvXBMgZJazS2OJ
+gopvcInY6XnVcgmycth8ULf8eMrjjqriEb5eTo3DR1FCb3YmOTaz0mQdrLac1idG
+OJxyXDWJeXkU4/0iR0s2gh0CAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAE5MyKrbL
+IrRPNqfYnJ1BrhPVjVOAF5oNlWUmm7zb/KRcLRJbSn7+OHVLTb98Ewj3D4ws9NPl
+G7pez915m8SMTqhtp40IDJTmRCSWiL7yZdWJChUOB7D1ei1GQ0ayz0xg27FTgWPW
+/Xk1jquFcFKnK6YYByRgL1xlbQXGI6vVK/CvRaMvOc+N9fY7WMBM28OsiHBFJXZ/
+qizQ9FDo1UmiqQCCkZWpfVv+767fvTLASttk68N3zlblbhVcIFCzmiVBlKSb9v/m
+R6NOUqILJdcV1JZWNjkIQ9dv/UIyaU44JCxX/qSXK4WazKmvV2m2SxAQvmXpdL8T
+DUHaL8LDXuFLVQ==</ds:X509Certificate>
+       </ds:X509Data>
+     </ds:KeyInfo>
+   </KeyDescriptor>
+   <SingleLogoutService
+     Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+     Location="https://ext-auth-rearch.aabtest.redhat.com/saml2/logout" />
+   <SingleLogoutService
+     Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+     Location="https://ext-auth-rearch.aabtest.redhat.com/saml2/logout" />
+   <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+   <AssertionConsumerService
+     index="0"
+     isDefault="true"
+     Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+     Location="https://ext-auth-rearch.aabtest.redhat.com/saml2/postResponse" />
+   <AssertionConsumerService
+     index="1"
+     Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact"
+     Location="https://ext-auth-rearch.aabtest.redhat.com/saml2/artifactResponse" />
+   <AssertionConsumerService
+     index="2"
+     Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS"
+     Location="https://ext-auth-rearch.aabtest.redhat.com/saml2/paosResponse" />
+ </SPSSODescriptor>
+</EntityDescriptor>

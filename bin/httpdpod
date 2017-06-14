@@ -1,0 +1,1 @@
+oc get pods | grep "httpd-" | cut -f1 -d" "

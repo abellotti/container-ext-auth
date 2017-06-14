@@ -1,0 +1,9 @@
+if [ "$(minishift status)" != "Running" ]
+then
+  echo "Minishift is not running"
+else
+  echo "Listing PVs ..."
+  oc login $(minishift ip):8443 -u system:admin
+  oc get pv
+  oc login $(minishift ip):8443 -u developer -p developer
+fi

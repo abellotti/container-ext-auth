@@ -1,0 +1,17 @@
+if [ "$(minishift status)" != "Running" ]
+then
+  echo "Minishift is not running"
+else
+  echo "Creating PV Templates ..."
+  oc login $(minishift ip):8443 -u system:admin
+  oc delete persistentvolume/miq-pv01
+  oc delete persistentvolume/miq-pv02
+  oc delete persistentvolume/miq-pv03
+  oc delete persistentvolume/miq-pv04
+  oc create -f templates_deploy/miq-pv-db.yaml
+  oc create -f templates_deploy/miq-pv-region.yaml
+  oc create -f templates_deploy/miq-pv-server.yaml
+  oc create -f templates_deploy/miq-pv-httpd.yaml
+  oc get pv
+  oc login $(minishift ip):8443 -u developer -p developer
+fi

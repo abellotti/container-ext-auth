@@ -1,0 +1,15 @@
+if [ "$(minishift status)" != "Running" ]
+then
+  echo "Minishift is not running"
+else
+  echo "Killing PODs and PVs ..."
+  oc login $(minishift ip):8443 -u developer -p developer
+  oc delete secret -l app=manageiq
+  oc delete all -l app=manageiq
+  oc delete secret -l app=manageiq
+  oc login $(minishift ip):8443 -u system:admin
+  oc delete pv --all
+  oc login $(minishift ip):8443 -u developer -p developer
+  oc delete pvc --all
+  oc delete pods --all
+fi

@@ -1,0 +1,3 @@
+oc login -u developer -p developer
+docker login -u developer -p $(oc whoami -t) $(minishift openshift registry)
+docker push 172.30.1.1:5000/ext-auth/httpd:latest

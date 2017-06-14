@@ -1,0 +1,24 @@
+if [ -z "$DOCKER_HOST" ]
+then
+  echo "Docker not setup on Minishift"
+elif [ -z "$(oc get pods | grep manageiq)" ]
+then
+  echo "ManageIQ Pods do not currently exist" 
+else
+  oc login $(minishift ip):8443 -u developer -p developer
+  echo "Scaling down manageiq and httpd ..."
+  scale_miq 0
+  scale_httpd 0
+  echo "Waiting for scale down ..."
+  while :
+  do
+    if [ -z "$(oc get pods 2>/dev/null | egrep 'manageiq|httpd')" ]
+    then
+      break
+    fi
+    sleep 1
+  done
+  echo "Scaling up manageiq and httpd ..."
+  scale_miq 1
+  scale_httpd 1
+fi

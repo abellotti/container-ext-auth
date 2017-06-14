@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2016 Red Hat, Inc. and/or its affiliates
+  ~ and other contributors as indicated by the @author tags.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<EntitiesDescriptor Name="urn:keycloak" xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+					xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+	<EntityDescriptor entityID="http://aab-keycloak:8080/auth/realms/miq">
+		<IDPSSODescriptor WantAuthnRequestsSigned="true"
+			protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+                        <KeyDescriptor use="signing">
+                          <dsig:KeyInfo>
+                            <dsig:KeyName>Tk9gpizmz8urOXtvGsgw6AEaOu3jbm28n80BJUA2KFc</dsig:KeyName>
+                            <dsig:X509Data>
+                              <dsig:X509Certificate>MIIClTCCAX0CBgFacRXjFjANBgkqhkiG9w0BAQsFADAOMQwwCgYDVQQDDANtaXEwHhcNMTcwMjI0MTcwNDA0WhcNMjcwMjI0MTcwNTQ0WjAOMQwwCgYDVQQDDANtaXEwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCt4WOtSCyDr848vJo+9ulFIYkTRQ/S+DaiBpJEQPuqWQhDpwbUSLB4qnPFGMJWHDDIzCVAE5j4JG7kfJc9Dzz+U1fdUnX2LPYxG4l4nBbV1Cg0ZxFMuvXEShCef4uKQBkDscjfr9dc9Ipw4iNu9jdq4atB9Osj5IUV7U45hmh5IwEcxQecaoI9Q3P5OyVJe0+EYFPq+WC6Mh/OKleB2jYaOkZJG0fvyqOVrgG3NZ75wYMQBj0cnunlS385aghegWSBCvyLbn1dBBNPUhyE1MMFxz3vlLSeQlTpe9ANxWlclRxinOYhXos5q5NSwgTaZXs6AA/3NsaTFpOKil8ji5ofAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAH3mmFNYRaf1RCXEFmVRHQAJQR3Z0ma0XjabV09cEUI7C+Zfb4fF8oNMkh48H7KbDaoLJ/Tst9RmlS8grEAH94dnKdLoMDfbnoLC2GoMGo8mtqX2LKucjPz470BVfGCClDz6WKHQEL64I9vTyogv2iH5x8c6tlbeVOdZShgsqdqVecUP1dKKoy1g8Br35mQck/bYJx5aYwZerMlPwMZhIzi8B+E3FlVBS/dieFXSHfqb+1+ygitMM1idU8FBaNBJ0IcFX7nonnSCdkw57sMKoJHabt9/HVpGk7KYTowuC4hxfGOIcgQhI9koohHKc4ylVy2zcOD1Sim8Fd8yJmqd8ow=</dsig:X509Certificate>
+                            </dsig:X509Data>
+                          </dsig:KeyInfo>
+                        </KeyDescriptor>
+
+			<SingleLogoutService
+					Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+					Location="http://aab-keycloak:8080/auth/realms/miq/protocol/saml" />
+			<SingleLogoutService
+					Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+					Location="http://aab-keycloak:8080/auth/realms/miq/protocol/saml" />
+			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+			<NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
+			<SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+				Location="http://aab-keycloak:8080/auth/realms/miq/protocol/saml" />
+			<SingleSignOnService
+				Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+				Location="http://aab-keycloak:8080/auth/realms/miq/protocol/saml" />
+			<SingleSignOnService
+				Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+				Location="http://aab-keycloak:8080/auth/realms/miq/protocol/saml" />
+		</IDPSSODescriptor>
+	</EntityDescriptor>
+</EntitiesDescriptor>

@@ -1,0 +1,31 @@
+if [ "$(minishift status)" != "Running" ]
+then
+  echo "Minishift is not running"
+else
+  oc login $(minishift ip):8443 -u system:admin
+  if [ -n "$(oc get templates | grep manageiq)" ]
+  then
+    echo "Deleting ManageIQ Template ..."
+    oc delete templates/manageiq
+  fi
+  if [ -n "$(oc get serviceaccounts | grep miq-anyuid)" ]
+  then
+    echo "Deleting miq-anyuid service account ..."
+    oc delete serviceaccounts/miq-anyuid
+  fi
+  if [ -n "$(oc get serviceaccounts | grep miq-sysadmin)" ]
+  then
+    echo "Deleting miq-sysadmin service account ..."
+    oc delete serviceaccounts/miq-sysadmin
+  fi
+  if [ -n "$(oc get scc | grep miq-sysadmin)" ]
+  then
+    echo "Deleting miq-sysadmin SCC ..."
+    oc delete scc miq-sysadmin
+  fi
+  echo "Creating miq-sysadmin SCC ..."
+  oc create -f templates/miq-sysadmin.yaml
+  echo "Creating ManageIQ Template ..."
+  oc create -f templates/miq-template.yaml
+  oc login $(minishift ip):8443 -u developer -p developer
+fi

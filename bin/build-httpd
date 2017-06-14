@@ -1,0 +1,16 @@
+if [ "$(minishift status)" != "Running" ]
+then
+  echo "Minishift is not running"
+else
+  if [ -z "$DOCKER_NAMESPACE" ]
+  then
+    echo "ManageIQ DOCKER_NAMESPACE is not defined"
+  elif [ ! -f Dockerfile ]
+  then
+    echo "Must run where Dockerfile exists"
+  else
+    echo "Building ManageIQ Httpd Docker Image for $DOCKER_NAMESPACE ..."
+    oc login $(minishift ip):8443 -u developer -p developer
+    docker build . -t manageiq/httpd:$DOCKER_NAMESPACE
+  fi
+fi

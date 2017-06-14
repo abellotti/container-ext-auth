@@ -1,0 +1,14 @@
+if [ -z "$DOCKER_HOST" ]
+then
+  echo "Docker not setup on Minishift"
+else
+  oc login $(minishift ip):8443 -u developer -p developer
+  if [ -n "$(oc get pods 2>/dev/null | grep manageiq)" ]
+  then
+    echo "ManageIQ pod already running ..."
+    exit 1
+  fi
+  echo "Scaling up ManageIQ and httpd ..."
+  scale_miq 1
+  scale_httpd 1
+fi

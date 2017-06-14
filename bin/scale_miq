@@ -1,0 +1,6 @@
+if [ -z "${1}" ]
+then
+  echo "Usage: scale_miq #_of_replicas  (0 to stop)"
+  exit 1
+fi
+oc scale statefulset manageiq --replicas=$1

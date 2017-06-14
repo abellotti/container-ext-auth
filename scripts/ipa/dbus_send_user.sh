@@ -1,0 +1,1 @@
+dbus-send --print-reply --system --dest=org.freedesktop.sssd.infopipe /org/freedesktop/sssd/infopipe org.freedesktop.sssd.infopipe.GetUserAttr string:abellotti array:string:mail,givenname,sn,displayname

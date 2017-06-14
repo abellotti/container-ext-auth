@@ -1,0 +1,25 @@
+if [ "$(minishift status)" != "Running" ]
+then
+  echo "Minishift is not running"
+else
+  if [ -z "$(echo $PATH | grep `pwd`)" ]
+  then
+    echo "Updating PATH to include `pwd` ..."
+    export PATH=:$PATH:`pwd`
+  fi
+
+  echo "oc Login as developer ..."
+  oc login $(minishift ip):8443 -u developer -p developer
+
+  echo "Setting up docker env ..."
+  eval $(minishift docker-env)
+
+  echo "Logging into minishift docker registry at $DOCKER_HOST ..."
+  docker login -u developer -p $(oc whoami -t) $(minishift openshift registry)
+
+  export OC_PROJECT="ext-auth"
+  echo "OpenShift Project: $OC_PROJECT"
+
+  export DOCKER_NAMESPACE="ext_auth_rearch"
+  echo "ManageIQ Docker Namespace: $DOCKER_NAMESPACE"
+fi

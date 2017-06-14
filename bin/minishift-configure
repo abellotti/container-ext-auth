@@ -1,0 +1,16 @@
+PROJECT="ext-auth"
+PROJECT_DESCRIPTION="ManageIQ External Authentication Prototype"
+PROJECT_DISPLAYNAME="MiQ Ext-Auth Prototype"
+./minishift-start
+if [ -z "$(oc projects --short=true | grep $PROJECT)" ]
+then
+  echo "Creating Project $PROJECT ..."
+  oc login -u developer -p developer
+  oc new-project $PROJECT --description="$PROJECT_DESCRIPTION"  --display-name="$PROJECT_DISPLAYNAME"
+
+  oc login -u system:admin
+  oc adm policy add-scc-to-user privileged system:serviceaccount:miq-proto:default
+else
+  echo "Project $PROJECT exists"
+fi
+
