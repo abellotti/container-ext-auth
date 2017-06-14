@@ -1,0 +1,28 @@
+#!/bin/bash
+
+PERSISTENT_AUTH_TYPE="${PERSISTENT}/config/auth_type"
+PERSISTENT_AUTH_CONFIG_FILES="${PERSISTENT}/config/files"
+
+AUTH_TYPE="internal"
+if [ -f ${PERSISTENT_AUTH_TYPE} ]
+then
+  AUTH_TYPE=`cat ${PERSISTENT_AUTH_TYPE}`
+fi
+
+if [ $AUTH_TYPE != "internal" ]
+then
+  echo "Initializing $AUTH_TYPE External Authentication"
+  if [ -d ${PERSISTENT_AUTH_CONFIG_FILES} ]
+  then
+    cd ${PERSISTENT_AUTH_CONFIG_FILES}
+    find . -print | cpio -pmvdu /
+  fi
+  cd /
+  if [ -f /etc/sssd/sssd.conf ]
+  then
+    systemctl enable sssd
+    systemctl start sssd
+  fi
+else
+  echo "No External Authentication Defined"
+fi

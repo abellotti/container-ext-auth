@@ -1,0 +1,18 @@
+name: auth-api
+version: 0.1.0
+
+authors:
+  - Alberto Bellotti <abellott@redhat.com>
+
+targets:
+  auth-api:
+    main: src/auth-api.cr
+
+crystal: 0.22.0
+
+license: MIT
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+    branch: master

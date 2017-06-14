@@ -1,0 +1,7 @@
+[Unit]
+Description=Starts the ManageIQ Httpd API Service
+After=dbus.service
+[Service]
+ExecStart=/usr/bin/auth-api --port=4100
+[Install]
+WantedBy=multi-user.target
