@@ -1,5 +1,5 @@
 echo "Killing Pod ..."
-./kill-pods
+kill-pods
 echo "Waiting for Pod removal ..."
 while :
 do
@@ -10,4 +10,4 @@ do
   sleep 1
 done
 echo "Deploying ManageIQ ..."
-./deploy-manageiq -f
+deploy-manageiq -f

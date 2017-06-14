@@ -1,7 +1,7 @@
 PROJECT="ext-auth"
 PROJECT_DESCRIPTION="ManageIQ External Authentication Prototype"
 PROJECT_DISPLAYNAME="MiQ Ext-Auth Prototype"
-./minishift-start
+minishift-start
 if [ -z "$(oc projects --short=true | grep $PROJECT)" ]
 then
   echo "Creating Project $PROJECT ..."

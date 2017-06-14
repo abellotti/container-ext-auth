@@ -7,10 +7,10 @@ then
 else
   if [ "${1}" = "-f" ]
   then
-    ./minishift-clean-pvs
-    ./create-pvs
-    ./create-template
-    ./set-service-accounts
+    minishift-clean-pvs
+    create-pvs
+    create-template
+    set-service-accounts
   fi
   oc login $(minishift ip):8443 -u developer -p developer
   oc new-app --template=manageiq -p APPLICATION_DOMAIN=ext-auth-rearch.aabtest.redhat.com
