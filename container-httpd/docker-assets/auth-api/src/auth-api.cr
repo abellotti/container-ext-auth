@@ -1,5 +1,6 @@
 require "./auth-api/*"
 require "kemal"
+require "dbus"
 require "json"
 
 def fetch_attr(output, attr)
