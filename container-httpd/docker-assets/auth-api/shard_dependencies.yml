@@ -1,7 +1,0 @@
-dependencies:
-  kemal:
-    github: kemalcr/kemal
-    branch: master
-  dbus:
-    github: oprypin/crystal-dbus
-    branch: master

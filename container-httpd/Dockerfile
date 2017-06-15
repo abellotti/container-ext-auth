@@ -52,7 +52,6 @@ RUN (cd /tmp/auth-api && \
      rpm --import https://dist.crystal-lang.org/rpm/RPM-GPG-KEY && \
      yum install crystal -y && \
      shards install && \
-     cat shard_dependencies.yml >> shard.yml  && \
      crystal build --release src/auth-api.cr && \
      cp auth-api /usr/bin/auth-api && \
      chmod 755 /usr/bin/auth-api && \
