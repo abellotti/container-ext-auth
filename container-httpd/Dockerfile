@@ -45,19 +45,19 @@ COPY docker-assets/appliance-initialize.sh /bin
 COPY docker-assets/container-scripts ${CONTAINER_SCRIPTS_ROOT}
 
 ## Build Auth-API
-RUN mkdir /tmp/auth-api
 COPY docker-assets/auth-api /tmp/auth-api
 RUN (cd /tmp/auth-api && \
      cp crystal.repo /etc/yum.repos.d/crystal.repo && \
      rpm --import https://dist.crystal-lang.org/rpm/RPM-GPG-KEY && \
-     yum install crystal -y && \
+     yum -y install --setopt=tsflags=nodocs crystal dbus-devel && \
      shards install && \
      crystal build --release src/auth-api.cr && \
      cp auth-api /usr/bin/auth-api && \
      chmod 755 /usr/bin/auth-api && \
      rpm -e crystal && \
      rm -f /etc/yum.repos.d/crystal.repo && \
-     cp auth-api.service /usr/lib/systemd/system/auth-api.service)
+     cp auth-api.service /usr/lib/systemd/system/auth-api.service && \
+     rm -rf /tmp/auth-api)
 
 RUN systemctl enable dbus httpd auth-api
 

@@ -3,52 +3,47 @@ require "kemal"
 require "dbus"
 require "json"
 
-def fetch_attr(output, attr)
-  match = output.match(/^.*dict entry\([\s]+string \"#{attr}\"[\s]+variant[\s]+array \[[\s]+string \"([^\"]+)\".*\).*$/)
-  match ? match[1] : nil
-end
-
-def parse_user_attrs(dbus_send_output)
-  output = dbus_send_output.gsub(/\n/, ' ')
-  {
-    "mail"        => fetch_attr(output, "mail"),
-    "givenname"   => fetch_attr(output, "givenname"),
-    "sn"          => fetch_attr(output, "sn"),
-    "displayname" => fetch_attr(output, "displayname")
-  }
-end
-
-def parse_groups(dbus_send_output)
-  output = dbus_send_output.gsub(/\n/, ' ')
-  match = output.match(/^.*array \[[\s]+(.*)[\s]+\].*$/)
-  return [] of String unless match
-  match[1].gsub(/string[\s]+/, ' ').split.map do |group|
-    name_match = group.match(/^\"(.*)\"$/)
-    name_match.nil? ? nil : name_match[1]
-  end
-end
-
 get "/api/dbus/user_attrs/:user" do |env|
-  env.response.content_type = "application/json"
   user = env.params.url["user"]
-  if user == ""
-    gen_error(env, 400, "Must specified a :user with /api/dbus/user_attrs/:user")
+  env.response.content_type = "application/json"
+  attrs_needed = %w(mail givenname sn display).as Array(String)
+
+  bus = DBus::Bus.new(LibDBus::BusType::SYSTEM)
+  obj = bus.object("org.freedesktop.sssd.infopipe", "/org/freedesktop/sssd/infopipe")
+  interface = obj.interface("org.freedesktop.sssd.infopipe")
+  user_attrs = interface.call("GetUserAttr", [ user, attrs_needed ]).reply[0]
+
+  if user_attrs == "No such user"
+    gen_error(env, 400, "No such user")
   else
-    cmd = "/usr/bin/dbus-send --print-reply --system --dest=org.freedesktop.sssd.infopipe /org/freedesktop/sssd/infopipe org.freedesktop.sssd.infopipe.GetUserAttr string:#{user} array:string:mail,givenname,sn,displayname"
-    res = `#{cmd} 2>&1`
-    $?.exit_status != 0 ? gen_error(env, 400, res) : { "result" => parse_user_attrs(res) }.to_json
+    hash_result = Hash(String, String).new
+    if user_attrs.is_a? Hash(DBus::Type, DBus::Type)
+      user_attrs.each do |key, dbus_value|
+        if dbus_value.is_a?(DBus::Variant)
+          value = dbus_value.value
+          if value.is_a?(Array(DBus::Type))
+            hash_result[key.as String] = value.first.as String
+          end
+        end
+      end
+    end
+    { "result" => hash_result }.to_json
   end
 end
 
 get "/api/dbus/groups/:user" do |env|
-  env.response.content_type = "application/json"
   user = env.params.url["user"]
-  if user == ""
-    gen_error(env, 400, "Must specified a :user with /api/dbus/groups/:user")
+  env.response.content_type = "application/json"
+
+  bus = DBus::Bus.new(LibDBus::BusType::SYSTEM)
+  obj = bus.object("org.freedesktop.sssd.infopipe", "/org/freedesktop/sssd/infopipe")
+  interface = obj.interface("org.freedesktop.sssd.infopipe")
+  groups = interface.call("GetUserGroups", [ user ]).reply[0]
+
+  if groups.is_a?(Array(DBus::Type))
+    { "result" => groups.map { |group| group.as String } }.to_json
   else
-    cmd = "/usr/bin/dbus-send --print-reply --system --dest=org.freedesktop.sssd.infopipe /org/freedesktop/sssd/infopipe org.freedesktop.sssd.infopipe.GetUserGroups string:#{user}"
-    res = `#{cmd} 2>&1`
-    $?.exit_status != 0 ? gen_error(env, 400, res) : { "result" => parse_groups(res) }.to_json
+    gen_error(env, 500, "Unsupported Dbus type returned by GetUserGroups")
   end
 end
 
