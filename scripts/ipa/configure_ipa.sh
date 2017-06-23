@@ -120,6 +120,7 @@ then
 /etc/pam.d/password-auth-ac
 /etc/pam.d/postlogin-ac
 /etc/pam.d/system-auth-ac
+/etc/nsswitch.conf
 /etc/sysconfig/network
 /etc/sysconfig/authconfig
 /etc/ssh/ssh_config

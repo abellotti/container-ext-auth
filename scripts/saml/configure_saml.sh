@@ -1,5 +1,3 @@
-# IDP_SERVER="aab-idp.aabsaml.redhat.com"
-# IDP_IPADDR="10.8.97.7"
 IDP_SERVER="aab-keycloak.aabsaml.redhat.com"
 IDP_IPADDR="172.16.30.133"
 IDP_REALM="miq"

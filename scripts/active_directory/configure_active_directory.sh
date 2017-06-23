@@ -1,17 +1,17 @@
 AD_IPADDR="10.8.96.173"
-AD_SERVER="joev-ad-server.cloudforms.lab.eng.rdu2.redhat.com"
 AD_DOMAIN="joev-ad.cloudforms.lab.eng.rdu2.redhat.com"
 AD_ADMIN="Administrator"
-AD_PASSWORD="smartvm"
+AD_PASSWORD=""
 
 SSSD_CONF="/etc/sssd/sssd.conf"
 KERBEROS_KEYTAB_FILE="/etc/krb5.keytab"
 KERBEROS_CONFIG_FILE="/etc/krb5.conf"
-MIQ_EXTAUTH="/etc/httpd/conf.d/manageiq-external-auth.conf"
+HTTPD_CONFIG_DIR="/etc/httpd/conf.d"
+MIQ_EXTAUTH="${HTTPD_CONFIG_DIR}/manageiq-external-auth.conf"
 
 if [ -z "${APPLICATION_DOMAIN}" ]
 then
-  APPLICATION_DOMAIN="ext-auth-rearch.aabtest.redhat.com"
+  APPLICATION_DOMAIN="ext-auth-rearch.cloudforms.lab.eng.rdu2.redhat.com"
   # echo "ManageIQ Application Domain is not configured"
   # exit 1
 fi
@@ -47,7 +47,7 @@ echo "Configuring PAM ..."
 cp $APPLIANCE_TEMPLATE_DIRECTORY/etc/pam.d/httpd-auth /etc/pam.d/httpd-auth
 
 chown apache $KERBEROS_KEYTAB_FILE
-chmod 600 $KERBEROS_KEYTAB_FILE
+chmod 640 $KERBEROS_KEYTAB_FILE
 
 echo "Configuring External HTTP ..."
 cp $APPLIANCE_TEMPLATE_DIRECTORY/etc/httpd/conf.d/manageiq-remote-user.conf /etc/httpd/conf.d/
@@ -89,32 +89,15 @@ then
   cp -p ${KERBEROS_KEYTAB_FILE} ${PERSISTENT_AUTH_FILES}${KERBEROS_KEYTAB_FILE}
   cp -p ${KERBEROS_CONFIG_FILE} ${PERSISTENT_AUTH_FILES}${KERBEROS_CONFIG_FILE}
 
-  IPA_ALL_FILES="/etc/krb5.keytab
+  ALL_FILES="/etc/hosts
 /etc/pam.d/httpd-auth
 /etc/pam.d/smartcard-auth-ac
 /etc/pam.d/fingerprint-auth-ac
 /etc/pam.d/password-auth-ac
 /etc/pam.d/postlogin-ac
 /etc/pam.d/system-auth-ac
-/etc/sysconfig/network
-/etc/sysconfig/authconfig
-/etc/ssh/ssh_config
-/etc/openldap/ldap.conf
-/etc/ipa/nssdb/cert8.db
-/etc/ipa/nssdb/key3.db
-/etc/ipa/nssdb/secmod.db
-/etc/ipa/nssdb/pwdfile.txt
-/etc/ipa/default.conf
-/etc/ipa/ca.crt
-/etc/pki/ca-trust/source/ipa.p11-kit
-/etc/sssd/sssd.conf"
-
-  ALL_FILES="/etc/pam.d/httpd-auth
-/etc/pam.d/smartcard-auth-ac
-/etc/pam.d/fingerprint-auth-ac
-/etc/pam.d/password-auth-ac
-/etc/pam.d/postlogin-ac
-/etc/pam.d/system-auth-ac
+/etc/nsswitch.conf
+/etc/resolv.conf
 /etc/sysconfig/network
 /etc/sysconfig/authconfig
 /etc/ssh/ssh_config
