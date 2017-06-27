@@ -6,3 +6,5 @@ oc cp $REPO_DIR/scripts/ipa              $HTTPD_POD:${TDIR}/ipa
 oc cp $REPO_DIR/scripts/saml             $HTTPD_POD:${TDIR}/saml
 oc cp $REPO_DIR/scripts/active_directory $HTTPD_POD:${TDIR}/active_directory
 oc cp $REPO_DIR/scripts/ldap             $HTTPD_POD:${TDIR}/ldap
+oc exec $HTTPD_POD -- rm -f /root/scripts
+oc exec $HTTPD_POD -- ln -s ${TDIR} /root/scripts
