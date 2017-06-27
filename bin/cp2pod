@@ -1,6 +1,7 @@
 set -x
 HTTPD_POD=`httpdpod`
 TDIR="/persistent/scripts"
+oc exec $HTTPD_POD -- rm -rf ${TDIR}
 oc exec $HTTPD_POD -- mkdir -p ${TDIR}
 oc cp $REPO_DIR/scripts/ipa              $HTTPD_POD:${TDIR}/ipa
 oc cp $REPO_DIR/scripts/saml             $HTTPD_POD:${TDIR}/saml

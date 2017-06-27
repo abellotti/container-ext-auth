@@ -77,7 +77,7 @@ then
   PERSISTENT_AUTH_CONFIG="/persistent/config"
   PERSISTENT_AUTH_TYPE="${PERSISTENT_AUTH_CONFIG}/auth_type"
   PERSISTENT_AUTH_FILES="${PERSISTENT_AUTH_CONFIG}/files"
-  echo "Saving IPA Config to ${PERSISTENT_AUTH_FILES} ..."
+  echo "Saving Active Directory Config to ${PERSISTENT_AUTH_FILES} ..."
   echo "ad" > ${PERSISTENT_AUTH_TYPE}
   rm -rf "${PERSISTENT_AUTH_FILES}"
 
