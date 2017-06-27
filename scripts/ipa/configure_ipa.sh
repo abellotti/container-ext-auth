@@ -87,7 +87,7 @@ cp $APPLIANCE_TEMPLATE_DIRECTORY${HTTPD_CONFIG_DIR}/manageiq-external-auth.conf.
 sed -i "s/<%= realm %>/${HOST_DOMAIN}/" ${HTTPD_CONFIG_DIR}/manageiq-external-auth.conf
 
 echo "Updating $SSSD_CONF ..."
-cp /root/ipa/sssd.conf $SSSD_CONF
+cp /persistent/scripts/ipa/sssd.conf $SSSD_CONF
 
 # echo "Set Timezone ..."
 # mv /etc/localtime /etc/localtime.bak

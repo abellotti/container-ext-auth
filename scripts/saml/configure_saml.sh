@@ -2,7 +2,7 @@ IDP_SERVER="aab-keycloak.aabsaml.redhat.com"
 IDP_IPADDR="172.16.30.133"
 IDP_REALM="miq"
 
-MIQ_SAML_CONFIG="/root/saml/saml2"
+MIQ_SAML_CONFIG="/persistent/scripts/saml/saml2"
 SAML2_CONFIG_DIR="/etc/httpd/saml2"
 HTTPD_CONFIG_DIR="/etc/httpd/conf.d/"
 

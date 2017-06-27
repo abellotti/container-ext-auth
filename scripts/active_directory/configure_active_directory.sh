@@ -57,15 +57,15 @@ sed -i "s:/etc/http.keytab:${KERBEROS_KEYTAB_FILE}:" $MIQ_EXTAUTH
 sed -i "s:Krb5KeyTab:KrbServiceName     Any\n  Krb5KeyTab:" $MIQ_EXTAUTH
 
 echo "Updating $SSSD_CONF ..."
-if [ -f /root/active_directory/sssd.conf ]
+if [ -f /persistent/scripts/active_directory/sssd.conf ]
 then
-  cp /root/active_directory/sssd.conf $SSSD_CONF
+  cp /persistent/scripts/active_directory/sssd.conf $SSSD_CONF
 fi
 
 echo "Updating $KERBEROS_CONFIG_FILE ..."
-if [ -f /root/active_directory/krb5.conf ]
+if [ -f /persistent/scripts/active_directory/krb5.conf ]
 then
-  cp /root/active_directory/krb5.conf $KERBEROS_CONFIG_FILE
+  cp /persistent/scripts/active_directory/krb5.conf $KERBEROS_CONFIG_FILE
 fi
 
 
