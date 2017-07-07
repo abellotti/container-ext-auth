@@ -1,7 +1,12 @@
+# for aab-macbook
 # minishift config set memory 10240
-# minishift config unset memory
 # minishift config set vm-driver vmwarefusion
-# minishift config unset vm-driver
+
+# for aab-openshift
+# minishift config set memory    24000
+# minishift config set cpus      2
+# minishift config set vm-driver kvm
+
 echo "Minishift Configuration:"
 echo "  Memory:  `minishift config get memory`"
 echo "  Cpus:    `minishift config get cpus`"
