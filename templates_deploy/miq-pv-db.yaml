@@ -6,7 +6,7 @@ spec:
   capacity:
     storage: 15Gi
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   hostPath:
     path: /var/lib/minishift/miq-db
-  persistentVolumeReclaimPolicy: Recycle
+  persistentVolumeReclaimPolicy: Retain
