@@ -13,6 +13,16 @@ else
     echo "Deleting miq-anyuid service account ..."
     oc delete serviceaccounts/miq-anyuid
   fi
+  if [ -n "$(oc get serviceaccounts | grep miq-orchestrator)" ]
+  then
+    echo "Deleting miq-orchestrator service account ..."
+    oc delete serviceaccounts/miq-orchestrator
+  fi
+  if [ -n "$(oc get serviceaccounts | grep miq-privileged)" ]
+  then
+    echo "Deleting miq-privileged service account ..."
+    oc delete serviceaccounts/miq-privileged
+  fi
   if [ -n "$(oc get serviceaccounts | grep miq-sysadmin)" ]
   then
     echo "Deleting miq-sysadmin service account ..."

@@ -1,0 +1,16 @@
+if [ "$(minishift status)" != "Running" ]
+then
+  echo "Minishift is not running"
+else
+  if [ ! -d miq-app -o ! -d miq-app-frontend ]
+  then
+    echo "Must run in the manageiq-pods images directory"
+  else
+    echo "Building ManageIQ Docker Images ..."
+    oc login $(minishift ip):8443 -u developer -p developer
+    cd miq-app
+    docker build . -t manageiq/manageiq-pods:backend-latest
+    cd ../miq-app-frontend
+    docker build . -t manageiq/manageiq-pods:frontend-latest
+  fi
+fi

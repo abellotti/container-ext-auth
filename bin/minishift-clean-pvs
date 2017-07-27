@@ -5,7 +5,7 @@ else
   PV_DIR=/var/lib/minishift
   set -x
   minishift ssh -- sudo mkdir -p ${PV_DIR}
-  minishift ssh -- sudo rm -rf ${PV_DIR}/miq-server ${PV_DIR}/miq-db ${PV_DIR}/miq-region ${PV_DIR}/miq-httpd
-  minishift ssh -- sudo mkdir  ${PV_DIR}/miq-server ${PV_DIR}/miq-db ${PV_DIR}/miq-region ${PV_DIR}/miq-httpd
-  minishift ssh -- sudo chmod 777  ${PV_DIR}/miq-server ${PV_DIR}/miq-db ${PV_DIR}/miq-region ${PV_DIR}/miq-httpd
+  minishift ssh -- sudo rm -rf ${PV_DIR}/miq-server ${PV_DIR}/miq-db ${PV_DIR}/miq-httpd
+  minishift ssh -- sudo mkdir  ${PV_DIR}/miq-server ${PV_DIR}/miq-db ${PV_DIR}/miq-httpd
+  minishift ssh -- sudo chmod 777  ${PV_DIR}/miq-server ${PV_DIR}/miq-db ${PV_DIR}/miq-httpd
 fi

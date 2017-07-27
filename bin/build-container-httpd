@@ -1,0 +1,13 @@
+if [ "$(minishift status)" != "Running" ]
+then
+  echo "Minishift is not running"
+else
+  if [ ! -f Dockerfile ]
+  then
+    echo "Must run in the container-httpd directory"
+  else
+    echo "Building ManageIQ Httpd Container Image ..."
+    oc login $(minishift ip):8443 -u developer -p developer
+    docker build . -t manageiq/httpd:latest
+  fi
+fi

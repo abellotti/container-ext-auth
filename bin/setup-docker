@@ -24,6 +24,6 @@ else
   export OC_PROJECT="ext-auth"
   echo "OpenShift Project: $OC_PROJECT"
 
-  export DOCKER_NAMESPACE="ext_auth_rearch"
+  export DOCKER_NAMESPACE="ext-auth-latest"
   echo "ManageIQ Docker Namespace: $DOCKER_NAMESPACE"
 fi
